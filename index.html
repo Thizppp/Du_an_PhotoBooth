@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photobooth</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Start Screen -->
+  <section id="start-screen" class="screen active">
+    <div class="glass-panel"> 
+      <h1 class="title">Photobooth</h1> 
+      <button id="start-button" class="btn btn-primary">
+        Nhấn đây nè má!
+      </button>
+    </div>
+  </section>
+
+  <!-- Contact me -->
+  <nav id="contact"></nav>
+    <ul class="btn-contact">
+      <li><button class="contact-fb""><a href="https://www.facebook.com/thiep.tran.346633?locale=vi_VN"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook"
+        viewBox="0 0 16 16">
+        <path
+          d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+      </svg></a></button></li>
+      <li><button class="contact-ig"><a href="https://www.instagram.com/thiep_ca/"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-instagram"
+        viewBox="0 0 16 16">
+        <path
+          d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+      </svg></a></button></li>
+    </ul>
+   </nav>
+
+  <!-- Preview Screen -->
+  <section id="preview-screen" class="screen">
+    <div class="glass-panel">
+      <div class="camera-container">
+        <div class="camera-frame" style="aspect-ratio: 12/9;">
+          <video id="video" playsinline autoplay></video>
+          <div id="countdown-display" class="count-display hidden"></div>
+          <div id="flash-overlay" class="flash-overlay"></div>
+          <div id="photo-counter" class="photo-counter hidden">0/3 Photos</div>
+          <button id="mirror-button" class="camera-control-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4"></path>
+              <path d="M19 3h-4"></path>
+              <path d="M19 21h-4"></path>
+              <path d="M21 12H9"></path>
+              <path d="m13 16 4-4-4-4"></path>
+            </svg>
+          </button>
+        </div>
+        <p class="instruction-text">Chụp 3 bức ảnh với khoảng thời gian 3 giây</p>
+        <button id="capture-button" class="btn btn-primary pulse-light">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+            <circle cx="12" cy="13" r="3"></circle>
+          </svg>
+          Start Capture
+        </button>
+      </div>
+      <div id="preview-section" class="preview-section">
+        <div id="preview-photos" class="preview-photos"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Edit Screen -->
+  <section id="edit-screen" class="screen">
+    <div class="glass-panel">
+      <h2>Your Photos</h2>
+      <div id="photostrip-container" class="photostrip-container"></div>
+      <div class="control-section">
+
+        <!-- Color options for Photostrip -->
+        <div class="option-group photostrip-options">
+          <div class="option-title">Photostrip Color</div>
+          <div class="color-options">
+            <div class="color-option selected" data-color="white" style="background-color: #fff; border: 1px solid #ddd;"></div>
+            <div class="color-option" data-color="black" style="background-color: #000;"></div>
+            <div class="color-option" data-color="cream" style="background-color: #FEF6E4;"></div>
+            <div class="color-option" data-color="lightblue" style="background-color: #9abcf0;"></div>
+            <div class="color-option" data-color="lightgreen" style="background-color: #F2FCE2;"></div>
+            <div class="color-option" data-color="lightpink" style="background-color: #fccfd4;"></div>
+          </div>
+        </div>
+
+        <!-- Filter options for Photostrip -->
+        <div class="option-group">
+          <div class="option-title">Photo Filter</div>
+          <div class="filter-options">
+            <div class="filter-option selected" data-filter="none">None</div>
+            <div class="filter-option" data-filter="black-and-white">B&W</div>
+            <div class="filter-option" data-filter="sepia">Sepia</div>
+            <div class="filter-option" data-filter="warm">Warm</div>
+            <div class="filter-option" data-filter="cold">Cold</div>
+            <div class="filter-option" data-filter="cool">Cool</div>
+          </div>
+        </div>
+
+        <!-- Sticker options for Photostrip -->
+        <div class="option-group">
+          <div class="option-title">Add Stickers</div>
+          <div class="sticker-options">
+            <div class="sticker" data-sticker="balloon1">
+              <img src="stickers/1.png" alt="Ballon 1">
+            </div>
+            <div class="sticker" data-sticker="balloon2">
+              <img src="stickers/8.png" alt="Ballon 2">
+            </div>
+            <div class="sticker" data-sticker="confetti">
+              <img src="stickers/2.png" alt="Sticker 3">
+            </div>
+            <div class="sticker" data-sticker="party-hat">
+              <img src="stickers/3.png" alt="Sticker 4">
+            </div>
+            <div class="sticker" data-sticker="cake">
+              <img src="stickers/4.png" alt="Sticker 5">
+            </div>
+            <div class="sticker" data-sticker="gift">
+              <img src="stickers/5.png" alt="Sticker 6">
+            </div>
+            <div class="sticker" data-sticker="sticker-9">
+              <img src="stickers/6.png" alt="Sticker 7">
+            </div>
+            <div class="sticker" data-sticker="sticker-8">
+              <img src="stickers/7.png" alt="Sticker 8">
+            </div>
+            <div class="sticker add-sticker">
+              <span>+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="option-group">
+        <!-- Select date for Photostrip -->
+          <div class="toggle-option">
+            <label for="enable-date">
+              <input type="checkbox" id="enable-date">
+              <span class="toggle-label">Enable Date</span>
+            </label>
+          </div>
+
+          <!-- Select Watermark for Photostrip -->
+          <div class="toggle-option">
+            <label for="enable-watermark">
+              <input type="checkbox" id="enable-watermark">
+              <span class="toggle-label">Enable Watermark</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button id="retake-button" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+            <path d="M21 3v5h-5"></path>
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+            <path d="M8 16H3v5"></path>
+          </svg>
+          Retake Photos
+        </button>
+        <button id="continue-button" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download
+        </button>
+      </div>
+
+      <!-- Sticker canvas for interactivity -->
+      <canvas id="sticker-canvas" class="hidden"></canvas>
+    </div>
+  </section>
+
+  <!-- Download Screen -->
+  <section id="download-screen" class="screen">
+    <div class="glass-panel">
+      <h2>Your Photos Are Ready!</h2>
+      <div class="download-container">
+        <div class="final-photo-container">
+          <img id="final-photo" alt="Your final photo">
+        </div>
+        <div class="download-options">
+          <button id="download-button" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download
+          </button>
+          <button id="restart-button" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+              <path d="M8 16H3v5"></path>
+            </svg>
+            Start Again
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hidden canvas for photo processing -->
+  <canvas id="canvas" class="hidden"></canvas>
+
+  <!-- Template for sticker control elements -->
+  <div id="sticker-template" class="hidden">
+    <div class="sticker-controls">
+      <button class="sticker-delete">&times;</button>
+      <button class="sticker-enlarge">+</button>
+      <button class="sticker-shrink">-</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="current-year"></span>:Cre by Thizppp </p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
