@@ -760,23 +760,37 @@ function generateFinalPhotostrip() {
   finalPhoto.src = finalCanvas.toDataURL('image/png');
 }
 
-// Enable touch drag for stickers on mobile
-function enableTouchDrag(element) {
+// Enable drag for stickers on both PC and mobile
+function enableDrag(element) {
   let startX = 0, startY = 0, initialX = 0, initialY = 0;
 
-  const onTouchMove = (e) => {
-    const touch = e.touches[0];
-    const deltaX = touch.clientX - startX;
-    const deltaY = touch.clientY - startY;
+  const onMove = (e) => {
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const deltaX = clientX - startX;
+    const deltaY = clientY - startY;
 
     element.style.left = `${initialX + deltaX}px`;
     element.style.top = `${initialY + deltaY}px`;
   };
 
-  const onTouchEnd = () => {
-    document.removeEventListener('touchmove', onTouchMove);
-    document.removeEventListener('touchend', onTouchEnd);
+  const onEnd = () => {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onEnd);
+    document.removeEventListener('touchmove', onMove);
+    document.removeEventListener('touchend', onEnd);
   };
+
+  element.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    startX = e.clientX;
+    startY = e.clientY;
+    initialX = parseInt(element.style.left) || 0;
+    initialY = parseInt(element.style.top) || 0;
+
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+  });
 
   element.addEventListener('touchstart', (e) => {
     const touch = e.touches[0];
@@ -785,14 +799,14 @@ function enableTouchDrag(element) {
     initialX = parseInt(element.style.left) || 0;
     initialY = parseInt(element.style.top) || 0;
 
-    document.addEventListener('touchmove', onTouchMove);
-    document.addEventListener('touchend', onTouchEnd);
+    document.addEventListener('touchmove', onMove);
+    document.addEventListener('touchend', onEnd);
   });
 }
 
-// Apply touch drag to all stickers
+// Apply drag to all stickers
 stickers.forEach(sticker => {
-  enableTouchDrag(sticker.element);
+  enableDrag(sticker.element);
 });
 
 // Apply filter to canvas context
