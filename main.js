@@ -760,6 +760,41 @@ function generateFinalPhotostrip() {
   finalPhoto.src = finalCanvas.toDataURL('image/png');
 }
 
+// Enable touch drag for stickers on mobile
+function enableTouchDrag(element) {
+  let startX = 0, startY = 0, initialX = 0, initialY = 0;
+
+  const onTouchMove = (e) => {
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - startX;
+    const deltaY = touch.clientY - startY;
+
+    element.style.left = `${initialX + deltaX}px`;
+    element.style.top = `${initialY + deltaY}px`;
+  };
+
+  const onTouchEnd = () => {
+    document.removeEventListener('touchmove', onTouchMove);
+    document.removeEventListener('touchend', onTouchEnd);
+  };
+
+  element.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    initialX = parseInt(element.style.left) || 0;
+    initialY = parseInt(element.style.top) || 0;
+
+    document.addEventListener('touchmove', onTouchMove);
+    document.addEventListener('touchend', onTouchEnd);
+  });
+}
+
+// Apply touch drag to all stickers
+stickers.forEach(sticker => {
+  enableTouchDrag(sticker.element);
+});
+
 // Apply filter to canvas context
 function applyCanvasFilter(ctx, width, height, filterType) {
   const imageData = ctx.getImageData(0, 0, width, height);
@@ -898,3 +933,5 @@ function showToast(message, type = 'success') {
 
 // Initialize the app
 window.addEventListener('DOMContentLoaded', init);
+
+
